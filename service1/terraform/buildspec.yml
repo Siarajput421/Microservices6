@@ -1,0 +1,56 @@
+version: 0.2
+
+
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875525659788.dkr.ecr.us-east-1.amazonaws.com
+      - uri1=public.ecr.aws/i8g4q7b2/ecr-1
+      - uri2=public.ecr.aws/i8g4q7b2/ecr-2
+      - uri3=public.ecr.aws/i8g4q7b2/ecr-3
+      - uri4=public.ecr.aws/i8g4q7b2/ecr-4
+      - uri5=public.ecr.aws/i8g4q7b2/ecr-5
+      - uri6=public.ecr.aws/i8g4q7b2/ecr-6
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t service1 -f ./service1/Dockerfile .
+      - docker tag service1:latest $uri1
+      - docker build -t service2 -f ./service2/Dockerfile .
+      - docker tag service2:latest $uri2
+      - docker build -t service3 -f ./service3/Dockerfile .
+      - docker tag service3:latest $uri3
+      - docker build -t service4 -f ./service4/Dockerfile .
+      - docker tag service4:latest $uri4
+      - docker build -t service5 -f ./service5/Dockerfile .
+      - docker tag service5:latest $uri5
+      - docker build -t service6 -f ./Service6/Dockerfile .
+      - docker tag service6:latest $uri6
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $uri1
+      - docker push $uri2
+      - docker push $uri3
+      - docker push $uri4
+      - docker push $uri5
+      - docker push $uri6
+      - echo Writing image definitions file...
+      - printf '[{"name":"react1-container","imageUri":"%s"}]' $uri1:latest > service1.json
+      - printf '[{"name":"react2-container","imageUri":"%s"}]' $uri2:latest > service2.json
+      - printf '[{"name":"react3-container","imageUri":"%s"}]' $uri3:latest > service3.json
+      - printf '[{"name":"react4-container","imageUri":"%s"}]' $uri4:latest > service4.json
+      - printf '[{"name":"react5-container","imageUri":"%s"}]' $uri5:latest > service5.json
+      - printf '[{"name":"react6-container","imageUri":"%s"}]' $uri6:latest > service6.json
+artifacts:
+    files:
+        - service1.json.json 
+        - service2.json.json 
+        - service3.json.json
+        - service4.json.json
+        - service5.json.json
+        - service6.json.json
