@@ -40,12 +40,12 @@ phases:
       - docker push $uri5:latest
       - docker push $uri6:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"react1-container","imageUri":"%s"}]' $uri1:latest > service1.json
-      - printf '[{"name":"react2-container","imageUri":"%s"}]' $uri2:latest > service2.json
-      - printf '[{"name":"react3-container","imageUri":"%s"}]' $uri3:latest > service3.json
-      - printf '[{"name":"react4-container","imageUri":"%s"}]' $uri4:latest > service4.json
-      - printf '[{"name":"react5-container","imageUri":"%s"}]' $uri5:latest > service5.json
-      - printf '[{"name":"react6-container","imageUri":"%s"}]' $uri6:latest > service6.json
+      - printf '[{"name":"service1","imageUri":"%s"}]' $uri1:latest > service1.json
+      - printf '[{"name":"service2","imageUri":"%s"}]' $uri2:latest > service2.json
+      - printf '[{"name":"service3","imageUri":"%s"}]' $uri3:latest > service3.json
+      - printf '[{"name":"service4","imageUri":"%s"}]' $uri4:latest > service4.json
+      - printf '[{"name":"service5","imageUri":"%s"}]' $uri5:latest > service5.json
+      - printf '[{"name":"service6","imageUri":"%s"}]' $uri6:latest > service6.json
 artifacts:
     files:
         - service1.json.json 
