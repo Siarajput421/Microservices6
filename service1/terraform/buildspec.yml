@@ -17,17 +17,17 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t service1 -f ./service1/Dockerfile .
+      - docker build -t service1 -f ./service1/dockerfile .
       - docker tag service1:latest $uri1
-      - docker build -t service2 -f ./service2/Dockerfile .
+      - docker build -t service2 -f ./service2/dockerfile .
       - docker tag service2:latest $uri2
-      - docker build -t service3 -f ./service3/Dockerfile .
+      - docker build -t service3 -f ./service3/dockerfile .
       - docker tag service3:latest $uri3
-      - docker build -t service4 -f ./service4/Dockerfile .
+      - docker build -t service4 -f ./service4/dockerfile .
       - docker tag service4:latest $uri4
-      - docker build -t service5 -f ./service5/Dockerfile .
+      - docker build -t service5 -f ./service5/dockerfile .
       - docker tag service5:latest $uri5
-      - docker build -t service6 -f ./Service6/Dockerfile .
+      - docker build -t service6 -f ./Service6/dockerfile .
       - docker tag service6:latest $uri6
   post_build:
     commands:
